@@ -1,0 +1,71 @@
+.form-element-container{
+    position: relative;
+}
+
+.container{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.msg-container{
+    padding: 20px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.74);
+}
+
+form{
+    background-color: rgb(252, 252, 252);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    width: max-content;
+    padding: 3% 10%;
+    box-shadow: rgb(231, 231, 231) 0 0 10px;
+    border-radius: 4px;
+}
+
+label{
+    pointer-events: none;
+    color: rgb(61, 61, 61);
+    display: block;
+    position: absolute;
+    top: 8px;
+    left: 4px;
+    background-color: rgb(255, 255, 255);
+    transition: .2s;
+}
+
+input:focus + label {
+    top: -10px;
+}
+
+input:valid + label {
+    top: -10px;
+}
+
+input:valid{
+    border-bottom: 3px solid rgb(0, 209, 105);
+}
+
+input:focus:invalid{
+    border-bottom: 3px solid rgb(226, 27, 0);
+}
+
+input{
+    border: none;
+    border-bottom: 1px solid rgb(211, 211, 211);
+    padding: 10px 10px;
+    border-radius: 3px;
+}
+
+button{
+    border: none;
+    border-bottom: 1px solid rgb(211, 211, 211);
+    padding: 10px 10px;
+    border-radius: 3px;
+}
