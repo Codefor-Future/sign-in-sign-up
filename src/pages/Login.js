@@ -18,13 +18,14 @@ import React from 'react';
                 {
                     props.isLoggedIn&&
                     <div>
-                        {`Hi ${props.user.first_name} you are logged in!`}
+                        {`Hi you are logged in!`}
                     </div>
                 }
                 {
                     props.errorInLogginIn&&
                     <div>
-                        {`Error when loggin in!`}
+                        {/* {`Error when loggin in!`} */}
+                        { props.msg }
                     </div>
                 }
             </div>
@@ -49,6 +50,7 @@ const mapStateToProps = (state)=>{
         user: state.userDetails,
         isLoggedIn: state.isLoggedIn,
         errorInLogginIn: state.errorInLogginIn,
+        msg: state.msg
     }
 }
 

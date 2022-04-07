@@ -1,21 +1,21 @@
 import axios from 'axios'
-const BASE_URL = 'https://3.140.210.76:8000/api';
+const BASE_URL = 'http://13.127.127.40/api';
 
 export const login = (payload) => {
     return dispatch => {
         // TODO login API call with axios
         let { email, password } = payload
 
-        axios.post(`${BASE_URL}/token`, {
+        axios.post(`${BASE_URL}/token/`, {
                 email,
                 password
             })
             .then((res) => {
-                console.log(res.status)
-                if (res.status !== 200) throw new Error(res.response)
+                console.log(res)
+                if (res.status !== 200) throw new Error(res.data.message)
                     // TODO update the userDetails obj from data from res.
                 let userDetails = {
-                    first_name: 'updated',
+                    first_name: '',
                     last_name: '',
                     email: email,
                     password: password
@@ -32,9 +32,13 @@ export const login = (payload) => {
                     email: email,
                     password: password
                 }
+                console.log(err)
                 dispatch({
                     type: "LOGIN_FAILED",
-                    payload:userDetails
+                    payload:{
+                        userDetails,
+                        msg:err.message
+                    }
                 })
             })
     }
@@ -43,16 +47,18 @@ export const login = (payload) => {
 export const signUp = (payload) => {
     return dispatch => {
         // TODO login API call with axios
-        let { email, password, first_name, last_name } = payload
+        let { email, password } = payload
+        let first_name = payload.firstName;
+        let last_name = payload.lastName
 
-        axios.post(`${BASE_URL}/user`, {
+        axios.post(`${BASE_URL}/user/`, {
                 email,
                 password,
                 first_name,
                 last_name
             })
             .then((res) => {
-                console.log(res.status)
+                console.log(res)
                 if (res.status !== 200) throw new Error(res.response)
                 // TODO update the userDetails obj from data from res.
                 let userDetails = {
@@ -63,10 +69,14 @@ export const signUp = (payload) => {
                 }
                 dispatch({
                     type: "SIGNUP_SUCCESS",
-                    payload:userDetails
+                    payload:{
+                        userDetails,
+                        msg: res.data.message
+                    }
                 })
             })
             .catch((err) => {
+                console.log(err.response)
                 let userDetails = {
                     first_name: first_name,
                     last_name: last_name,
@@ -75,7 +85,10 @@ export const signUp = (payload) => {
                 }
                 dispatch({
                     type: "SIGNUP_FAILED",
-                    payload:userDetails
+                    payload:{
+                        userDetails,
+                        msg: err.response.message
+                    }
                 })
             })
     }

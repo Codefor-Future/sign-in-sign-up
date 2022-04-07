@@ -20,7 +20,8 @@ import React from 'react';
                 {
                     props.isSignedUp&&
                     <div>
-                        {`Hi ${props.user.first_name} you are signed up!`}
+                        {/* {`Hi ${props.user.first_name} ${props.user.last_name} you have signed up!`} */}
+                        {props.msg}
                     </div>
                 }
                 {
@@ -59,6 +60,7 @@ const mapStateToProps = (state)=>{
         user: state.userDetails,
         isSignedUp: state.isSignedUp,
         errorInSignUp: state.errorInSignUp,
+        msg: state.msg
     }
 }
 

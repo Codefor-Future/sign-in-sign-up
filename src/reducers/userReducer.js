@@ -9,6 +9,7 @@ const initState = {
     errorInLogginIn: false,
     isSignedUp: false,
     errorInSignUp: false,
+    msg:''
 }
 
 const userReducer = (state = initState, action) => {
@@ -16,24 +17,29 @@ const userReducer = (state = initState, action) => {
         return {
             ...state,
             userDetails: action.payload,
+            errorInLogginIn: false,
             isLoggedIn: true,
         }
     } else if(action.type === 'LOGIN_FAILED'){
         return {
             ...state,
-            userDetails: action.payload,
+            userDetails: action.payload.userDetails,
+            msg: action.payload.msg,
             errorInLogginIn: true,
+            isLoggedIn: false,
         }
     }else if(action.type === 'SIGNUP_SUCCESS'){
         return {
             ...state,
-            userDetails: action.payload,
+            userDetails: action.payload.userDetails,
+            msg: action.payload.msg,
             isSignedUp: true,
         }
     }else if(action.type === 'SIGNUP_FAILED'){
         return {
             ...state,
-            userDetails: action.payload,
+            userDetails: action.payload.userDetails,
+            msg: action.payload.msg,
             errorInSignUp: true,
         }
     }else {
